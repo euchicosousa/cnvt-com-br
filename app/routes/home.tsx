@@ -1,10 +1,72 @@
+import { ArrowRightIcon } from "lucide-react";
+import { Link } from "react-router";
+import { Logo } from "~/components/Logo";
+
 export default function Home() {
   return (
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit,
-      exercitationem totam praesentium vitae perferendis aperiam quasi quidem id
-      nisi nesciunt quisquam fuga quia, corrupti ab ad soluta dolor distinctio
-      repellendus?
-    </div>
+    <>
+      <div className="md:grid flex flex-col justify-between h-full grow md:grid-cols-2">
+        <div className="flex flex-col justify-between p-12 md:border-r">
+          <div>
+            <Logo className="logo size-24 md:size-48" />
+          </div>
+          <div className="md:hidden mt-8 text-sm">
+            <span>
+              Não fazemos post que só enfeita feed, criamos estratégia que vende
+              para com empreendedores que querem{" "}
+              <span className="font-medium">Marcas Paradigma ®</span>, não mais
+              uma opção na prateleira.
+            </span>
+          </div>
+          <div className="text-xl md:block hidden">
+            <span>
+              Pensamos no seu negócio como se fosse nosso. Não fazemos post que
+              só enfeita feed, criamos estratégia que vende. Quando você
+              conquista, comemoramos. Quando aperta, encontramos a saída juntos.
+              Trabalhamos com empreendedores que querem{" "}
+              <span className="font-medium">Marcas Paradigma ®</span>, não mais
+              uma opção na prateleira.
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col links divide-y">
+          {[
+            {
+              title: "SOCIAL MEDIA",
+              href: "https://form.respondi.app/tAaiKV53",
+            },
+            {
+              title: "CONSULTORIA DE MARKETING",
+              href: "https://form.respondi.app/tAaiKV53",
+            },
+            {
+              title: "IDENTIDADE VISUAL",
+              href: "https://form.respondi.app/tAaiKV53",
+            },
+            {
+              title: "CNVT.LINK",
+              href: "https://form.respondi.app/tAaiKV53",
+            },
+            {
+              title: "FERRAMENTAS",
+              href: "/ferramentas",
+            },
+          ].map((link, i) => (
+            <Link to={link.href} key={i}>
+              <span className="flex gap-12">
+                <ArrowRightIcon className="size-12 shrink-0" />
+                {/* 
+                <span>{link.title}</span>
+                {/*  */}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="font-medium tracking-wider flex p-12 text-xs border-t justify-between">
+        <div>ONDE PARCERIA VIRA RESULTADO</div>
+        <div>CNVT © {new Date().getFullYear()}</div>
+      </div>
+    </>
   );
 }
