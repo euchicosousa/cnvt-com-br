@@ -52,18 +52,30 @@ export default function Copy({
 
         splitRef.current.push(split);
 
-        const computedStyle = window.getComputedStyle(el);
-        const textIdent = computedStyle.textIndent;
+        if (window) {
+          const computedStyle = window.getComputedStyle(el);
+          const textIdent = computedStyle.textIndent;
 
-        if (textIdent && textIdent !== "0px") {
-          if (split.lines.length > 0) {
-            split.lines[0].style.textIndent = textIdent;
+          if (textIdent && textIdent !== "0px") {
+            if (split.lines.length > 0) {
+              split.lines[0].style.textIndent = textIdent;
+            }
+            el.style.textIndent = "0px";
           }
-          el.style.textIndent = "0px";
         }
 
         lines.current.push(...split.lines);
       });
+
+      gsap.set(lines.current, { y: "100%" });
+
+      const animationProps = {
+        y: "0%",
+        duration: 1,
+        stagger: 0.1,
+        ease: "power4.out",
+        delay,
+      };
     },
     {
       scope: containerRef,
