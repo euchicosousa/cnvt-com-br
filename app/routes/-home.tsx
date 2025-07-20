@@ -1,4 +1,4 @@
-import Copy from "~/components/Copy";
+import Copy from "~/components/-Copy";
 import type { Route } from "./+types/home";
 import { ArrowRightIcon } from "lucide-react";
 import { Logo } from "~/components/Logo";
