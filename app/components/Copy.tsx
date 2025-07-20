@@ -24,10 +24,27 @@ export default function Copy({
   const splitRef = useRef<SplitTextInstance[]>([]);
   const lines = useRef<HTMLElement[]>([]);
 
-  useGSAP(() => {}, {
-    scope: containerRef,
-    dependencies: [animateOnScroll, delay],
-  });
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+
+      splitRef.current = [];
+      elementRef.current = [];
+      lines.current = [];
+
+      let elements: HTMLElement[] = [];
+
+      if (containerRef.current.hasAttribute("data-copy-wrapper")) {
+        elements = Array.from(containerRef.current.children) as HTMLElement[];
+      } else {
+        elements = [containerRef.current as HTMLElement];
+      }
+    },
+    {
+      scope: containerRef,
+      dependencies: [animateOnScroll, delay],
+    }
+  );
 
   if (React.Children.count(children) === 1) {
     return React.cloneElement(children, { ref: containerRef });
