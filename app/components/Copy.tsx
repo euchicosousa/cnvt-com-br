@@ -43,11 +43,13 @@ export default function Copy({
       elements.forEach((el) => {
         elementRef.current.push(el);
 
-        // const split = SplitText.create(el, {
-        //   type: "lines",
-        //   mask: "lines",
-        //   linesClass: "line++",
-        // }) as SplitTextInstance;
+        if (!el) return;
+
+        const split = SplitText.create(el, {
+          type: "lines",
+          mask: "lines",
+          linesClass: "line++",
+        });
 
         // splitRef.current.push(split);
 
