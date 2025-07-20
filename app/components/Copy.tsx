@@ -1,11 +1,13 @@
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-
-import ScrollTrigger from "gsap/ScrollTrigger";
 import React, { useRef, type JSX } from "react";
 
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+
+import * as ScrollTriggerModule from "gsap/ScrollTrigger";
 import * as SplitTextModule from "gsap/SplitText";
+
 const SplitText = SplitTextModule.default;
+const ScrollTrigger = ScrollTriggerModule.default;
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
