@@ -1,8 +1,26 @@
+import { useGSAP } from "@gsap/react";
 import { ArrowRightIcon } from "lucide-react";
+import { useRef } from "react";
 import { Link } from "react-router";
 import { Logo } from "~/components/Logo";
 
+import { gsap } from "gsap";
+
 export default function Home() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(
+    () => {
+      gsap.to(".logo", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.out",
+      });
+    },
+    { scope: containerRef }
+  );
+
   return (
     <>
       <div className="md:grid flex flex-col justify-between h-full grow md:grid-cols-2">
