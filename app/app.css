@@ -35,11 +35,11 @@
   font-style: normal;
   font-display: swap;
 }
-/* 
+
 @theme {
   --font-sans: "PP Object Sans", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-} */
+}
 
 body {
   @apply font-light;

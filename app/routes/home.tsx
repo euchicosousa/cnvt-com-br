@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { Logo } from "~/components/Logo";
 
 import { gsap } from "gsap";
-import Copy from "~/components/--Copy";
+import Copy from "~/components/Copy";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -32,8 +32,8 @@ export default function Home() {
               style={{ transform: "translateY(100%)", opacity: 0 }}
             />
           </div>
-          <div className="md:hidden mt-8 text-sm">
-            <Copy>
+          <div className="md:hidden mt-8 text-sm tracking-wide">
+            <Copy delay={0.4} animateOnScroll={false}>
               <span>
                 Não fazemos post que só enfeita feed, criamos estratégia que
                 vende para com empreendedores que querem{" "}
@@ -42,8 +42,8 @@ export default function Home() {
               </span>
             </Copy>
           </div>
-          <div className="text-xl md:block hidden">
-            <Copy>
+          <div className="text-xl md:block hidden tracking-wide">
+            <Copy delay={0.4} animateOnScroll={false}>
               <span>
                 Pensamos no seu negócio como se fosse nosso. Não fazemos post
                 que só enfeita feed, criamos estratégia que vende. Quando você
