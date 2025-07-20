@@ -1,21 +1,8 @@
-import type { ReactElement, ReactNode } from "react";
-import React, { useRef } from "react";
+import React, { useRef, type JSX } from "react";
 
-import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-
-gsap.registerPlugin(ScrollTrigger, SplitText);
-
-interface CopyProps {
-  children: ReactNode;
-  animateOnScroll?: boolean;
-  delay?: number;
-}
-
-// SplitText type workaround (since gsap types may not export it)
 type SplitTextInstance = {
   lines: HTMLElement[];
   revert: () => void;
@@ -25,15 +12,24 @@ export default function Copy({
   children,
   animateOnScroll = true,
   delay = 0,
-}: CopyProps) {
+}: {
+  children: JSX.Element;
+  animateOnScroll?: boolean;
+  delay?: number;
+}) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const elementRef = useRef<HTMLElement[]>([]);
   const splitRef = useRef<SplitTextInstance[]>([]);
   const lines = useRef<HTMLElement[]>([]);
 
   useGSAP(
-    () => {
+    async () => {
       if (!containerRef.current) return;
+
+      const SplitText = (await import("gsap/SplitText")).default;
+      const ScrollTrigger = (await import("gsap/ScrollTrigger")).default;
+
+      gsap.registerPlugin(ScrollTrigger, SplitText);
 
       splitRef.current = [];
       elementRef.current = [];
@@ -49,6 +45,8 @@ export default function Copy({
 
       elements.forEach((el) => {
         elementRef.current.push(el);
+
+        if (!el) return;
 
         // @ts-ignore: SplitText.create is not typed in gsap types
         const split = SplitText.create(el, {
@@ -105,18 +103,14 @@ export default function Copy({
         });
       };
     },
-    { scope: containerRef, dependencies: [animateOnScroll, delay] }
+    {
+      scope: containerRef,
+      dependencies: [animateOnScroll, delay],
+    }
   );
 
-  if (React.Children.count(children) === 1 && React.isValidElement(children)) {
-    // Only pass ref if the child is a DOM element
-    const child = children as ReactElement;
-    if (typeof child.type === "string") {
-      // @ts-expect-error: ref is valid for DOM elements
-      return React.cloneElement(child, { ref: containerRef });
-    }
-    // If not a DOM element, just render as is
-    return child;
+  if (React.Children.count(children) === 1) {
+    return React.cloneElement(children, { ref: containerRef });
   }
 
   return (

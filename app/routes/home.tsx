@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { Logo } from "~/components/Logo";
 
 import { gsap } from "gsap";
-import Copy from "~/components/Copy";
+import Copy from "~/components/--Copy";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -81,7 +81,7 @@ export default function Home() {
             <Link to={link.href} key={i}>
               <span className="flex gap-12">
                 <ArrowRightIcon className="size-12 shrink-0" />
-                <Copy>
+                <Copy animateOnScroll={false} delay={0.1 * i + 0.4}>
                   <span>{link.title}</span>
                 </Copy>
               </span>
@@ -90,8 +90,12 @@ export default function Home() {
         </div>
       </div>
       <div className="font-medium tracking-wider flex p-12 text-xs border-t justify-between">
-        <div>ONDE PARCERIA VIRA RESULTADO</div>
-        <div>CNVT © {new Date().getFullYear()}</div>
+        <Copy animateOnScroll={false} delay={0.8}>
+          <div>ONDE PARCERIA VIRA RESULTADO</div>
+        </Copy>
+        <Copy animateOnScroll={false} delay={1}>
+          <div>CNVT © {new Date().getFullYear()}</div>
+        </Copy>
       </div>
     </>
   );
