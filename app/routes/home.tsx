@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { Logo } from "~/components/Logo";
 
 import { gsap } from "gsap";
+import Copy from "~/components/Copy";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -32,12 +33,14 @@ export default function Home() {
             />
           </div>
           <div className="md:hidden mt-8 text-sm">
-            <span>
-              Não fazemos post que só enfeita feed, criamos estratégia que vende
-              para com empreendedores que querem{" "}
-              <span className="font-medium">Marcas Paradigma ®</span>, não mais
-              uma opção na prateleira.
-            </span>
+            <Copy>
+              <span>
+                Não fazemos post que só enfeita feed, criamos estratégia que
+                vende para com empreendedores que querem{" "}
+                <span className="font-medium">Marcas Paradigma ®</span>, não
+                mais uma opção na prateleira.
+              </span>
+            </Copy>
           </div>
           <div className="text-xl md:block hidden">
             <span>
