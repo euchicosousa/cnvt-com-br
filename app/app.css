@@ -46,14 +46,14 @@ body {
 }
 
 .links > a {
-  @apply py-6 md:h-1/4 flex items-center text-3xl md:text-5xl overflow-hidden transition;
+  @apply py-6 md:h-1/5 flex items-center text-2xl md:text-5xl overflow-hidden transition;
 }
 
 .links > a > span {
-  @apply -ml-12 transition-[margin-left] duration-500 ease-in-out items-center;
+  @apply -ml-12 transition-[margin-left] duration-500 ease-in-out items-center    w-full;
 }
 .links > a:hover > span {
-  @apply ml-12;
+  @apply ml-10;
 }
 .links > a:hover {
   @apply bg-zinc-100 text-zinc-950;
