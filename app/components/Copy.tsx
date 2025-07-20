@@ -1,8 +1,8 @@
+import type { ReactElement, ReactNode } from "react";
 import React, { useRef } from "react";
-import type { ReactNode, ReactElement, MutableRefObject } from "react";
 
-import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";

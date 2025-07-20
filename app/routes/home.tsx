@@ -85,9 +85,9 @@ export default function Home() {
             <Link to={link.href} key={i}>
               <span className="flex gap-12">
                 <ArrowRightIcon className="size-12 shrink-0" />
-                <Copy delay={i * 0.1 + 0.4}>
-                  <span>{link.title}</span>
-                </Copy>
+                {/* <Copy delay={i * 0.1 + 0.4}> */}
+                <span>{link.title}</span>
+                {/* </Copy> */}
               </span>
             </Link>
           ))}
