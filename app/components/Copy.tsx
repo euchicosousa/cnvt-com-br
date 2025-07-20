@@ -10,11 +10,24 @@ type SplitTextInstance = {
   revert: () => void;
 };
 
-export default function Copy({ children }: { children: JSX.Element }) {
+export default function Copy({
+  children,
+  animateOnScroll = true,
+  delay = 0,
+}: {
+  children: JSX.Element;
+  animateOnScroll?: boolean;
+  delay?: number;
+}) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const elementRef = useRef<HTMLElement[]>([]);
   const splitRef = useRef<SplitTextInstance[]>([]);
   const lines = useRef<HTMLElement[]>([]);
+
+  useGSAP(() => {}, {
+    scope: containerRef,
+    dependencies: [animateOnScroll, delay],
+  });
 
   if (React.Children.count(children) === 1) {
     return React.cloneElement(children, { ref: containerRef });
