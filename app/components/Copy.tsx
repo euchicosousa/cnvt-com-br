@@ -52,17 +52,17 @@ export default function Copy({
 
         splitRef.current.push(split);
 
-        if (window) {
-          const computedStyle = window.getComputedStyle(el);
-          const textIdent = computedStyle.textIndent;
+        // if (window) {
+        //   const computedStyle = window.getComputedStyle(el);
+        //   const textIdent = computedStyle.textIndent;
 
-          if (textIdent && textIdent !== "0px") {
-            if (split.lines.length > 0) {
-              split.lines[0].style.textIndent = textIdent;
-            }
-            el.style.textIndent = "0px";
-          }
-        }
+        //   if (textIdent && textIdent !== "0px") {
+        //     if (split.lines.length > 0) {
+        //       split.lines[0].style.textIndent = textIdent;
+        //     }
+        //     el.style.textIndent = "0px";
+        //   }
+        // }
 
         lines.current.push(...split.lines);
       });
