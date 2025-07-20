@@ -1,4 +1,4 @@
-import cn from "@sglara/cn";
+import { cn } from "~/lib";
 
 export function Logo({
   className,
