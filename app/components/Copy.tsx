@@ -45,26 +45,60 @@ export default function Copy({
 
         if (!el) return;
 
+        // @ts-ignore: SplitText.create is not typed in gsap types
         const split = SplitText.create(el, {
           type: "lines",
           mask: "lines",
           linesClass: "line++",
-        });
+        }) as SplitTextInstance;
 
-        // splitRef.current.push(split);
+        splitRef.current.push(split);
 
-        // const computedStyle = window.getComputedStyle(el);
-        // const textIdent = computedStyle.textIndent;
+        const computedStyle = window.getComputedStyle(el);
+        const textIdent = computedStyle.textIndent;
 
-        // if (textIdent && textIdent !== "0px") {
-        //   if (split.lines.length > 0) {
-        //     split.lines[0].style.textIndent = textIdent;
-        //   }
-        //   el.style.textIndent = "0px";
-        // }
+        if (textIdent && textIdent !== "0px") {
+          if (split.lines.length > 0) {
+            split.lines[0].style.textIndent = textIdent;
+          }
+          el.style.textIndent = "0px";
+        }
 
-        // lines.current.push(...split.lines);
+        lines.current.push(...split.lines);
       });
+
+      gsap.set(lines.current, { y: "100%" });
+
+      const animationProps = {
+        y: "0%",
+        duration: 1,
+        stagger: 0.1,
+        ease: "power4.out",
+        delay,
+      };
+
+      if (animateOnScroll) {
+        gsap.to(lines.current, {
+          ...animationProps,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        });
+      } else {
+        gsap.to(lines.current, {
+          ...animationProps,
+        });
+      }
+
+      return () => {
+        splitRef.current.forEach((split) => {
+          if (split) {
+            split.revert();
+          }
+        });
+      };
     },
     {
       scope: containerRef,
