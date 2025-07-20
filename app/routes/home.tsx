@@ -25,8 +25,11 @@ export default function Home() {
     <>
       <div className="md:grid flex flex-col justify-between h-full grow md:grid-cols-2">
         <div className="flex flex-col justify-between p-12 md:border-r">
-          <div>
-            <Logo className="logo size-24 md:size-48" />
+          <div ref={containerRef}>
+            <Logo
+              className="logo size-24 md:size-48"
+              style={{ transform: "translateY(100%)", opacity: 0 }}
+            />
           </div>
           <div className="md:hidden mt-8 text-sm">
             <span>
