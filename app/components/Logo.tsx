@@ -1,4 +1,4 @@
-import { cn } from "@sglara/cn";
+import cn from "@sglara/cn";
 
 export function Logo({
   className,
