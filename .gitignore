@@ -4,3 +4,8 @@
 # React Router
 /.react-router/
 /build/
+
+
+home.tsx
+ferramentas.tsx
+Copy.tsx
