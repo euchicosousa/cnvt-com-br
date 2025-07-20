@@ -1,9 +1,11 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import SplitText from "gsap/SplitText";
 import React, { useRef, type JSX } from "react";
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 type SplitTextInstance = {
   lines: HTMLElement[];
