@@ -39,43 +39,6 @@ export default function Copy({
       } else {
         elements = [containerRef.current as HTMLElement];
       }
-
-      elements.forEach((el) => {
-        elementRef.current.push(el);
-
-        // @ts-ignore: SplitText.create is not typed in gsap types
-        const split = SplitText.create(el, {
-          type: "lines",
-          mask: "lines",
-          linesClass: "line++",
-        }) as SplitTextInstance;
-
-        splitRef.current.push(split);
-
-        // if (window) {
-        //   const computedStyle = window.getComputedStyle(el);
-        //   const textIdent = computedStyle.textIndent;
-
-        //   if (textIdent && textIdent !== "0px") {
-        //     if (split.lines.length > 0) {
-        //       split.lines[0].style.textIndent = textIdent;
-        //     }
-        //     el.style.textIndent = "0px";
-        //   }
-        // }
-
-        lines.current.push(...split.lines);
-      });
-
-      gsap.set(lines.current, { y: "100%" });
-
-      const animationProps = {
-        y: "0%",
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.out",
-        delay,
-      };
     },
     {
       scope: containerRef,
