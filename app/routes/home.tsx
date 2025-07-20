@@ -43,14 +43,16 @@ export default function Home() {
             </Copy>
           </div>
           <div className="text-xl md:block hidden">
-            <span>
-              Pensamos no seu negócio como se fosse nosso. Não fazemos post que
-              só enfeita feed, criamos estratégia que vende. Quando você
-              conquista, comemoramos. Quando aperta, encontramos a saída juntos.
-              Trabalhamos com empreendedores que querem{" "}
-              <span className="font-medium">Marcas Paradigma ®</span>, não mais
-              uma opção na prateleira.
-            </span>
+            <Copy>
+              <span>
+                Pensamos no seu negócio como se fosse nosso. Não fazemos post
+                que só enfeita feed, criamos estratégia que vende. Quando você
+                conquista, comemoramos. Quando aperta, encontramos a saída
+                juntos. Trabalhamos com empreendedores que querem{" "}
+                <span className="font-medium">Marcas Paradigma ®</span>, não
+                mais uma opção na prateleira.
+              </span>
+            </Copy>
           </div>
         </div>
         <div className="flex flex-col links divide-y">
