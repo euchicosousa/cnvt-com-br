@@ -3,14 +3,6 @@ import React, { useRef, type JSX } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import * as ScrollTriggerModule from "gsap/ScrollTrigger";
-import * as SplitTextModule from "gsap/SplitText";
-
-const SplitText = SplitTextModule.default;
-const ScrollTrigger = ScrollTriggerModule.default;
-
-gsap.registerPlugin(ScrollTrigger, SplitText);
-
 type SplitTextInstance = {
   lines: HTMLElement[];
   revert: () => void;
@@ -31,8 +23,13 @@ export default function Copy({
   const lines = useRef<HTMLElement[]>([]);
 
   useGSAP(
-    () => {
+    async () => {
       if (!containerRef.current) return;
+
+      const SplitText = (await import("gsap/SplitText")).default;
+      const ScrollTrigger = (await import("gsap/ScrollTrigger")).default;
+
+      gsap.registerPlugin(ScrollTrigger, SplitText);
 
       splitRef.current = [];
       elementRef.current = [];
