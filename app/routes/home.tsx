@@ -81,9 +81,9 @@ export default function Home() {
             <Link to={link.href} key={i}>
               <span className="flex gap-12">
                 <ArrowRightIcon className="size-12 shrink-0" />
-                {/* 
-                <span>{link.title}</span>
-                {/*  */}
+                <Copy>
+                  <span>{link.title}</span>
+                </Copy>
               </span>
             </Link>
           ))}
