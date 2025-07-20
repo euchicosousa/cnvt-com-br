@@ -10,7 +10,22 @@ import {
 import "./app.css";
 import type { Route } from "./+types/root";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  useGSAP(() => {
+    gsap.to(".overlay", {
+      opacity: 0,
+
+      duration: 1,
+      ease: "power2.out",
+      onComplete: () => {
+        gsap.set(".overlay", { display: "none" });
+      },
+    });
+  });
+
   return (
     <html lang="en">
       <head>
@@ -19,8 +34,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-zinc-950 text-zinc-100 flex flex-col justify-between min-h-screen border-[16px]">
+      <body className="relative bg-zinc-950 text-zinc-100 flex flex-col justify-between min-h-screen border-[36px] border-zinc-100">
         {children}
+        <div className="fixed overlay top-[36px] bottom-[36px] left-[36px] right-[36px] bg-zinc-950"></div>
         <ScrollRestoration />
         <Scripts />
       </body>

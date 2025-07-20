@@ -1,11 +1,16 @@
 import { useGSAP } from "@gsap/react";
 import { ArrowRightIcon } from "lucide-react";
 import { useRef } from "react";
-import { Link } from "react-router";
+import { Link, type MetaArgs } from "react-router";
 import { Logo } from "~/components/Logo";
 
 import { gsap } from "gsap";
 import Copy from "~/components/Copy";
+import type { Route } from "./+types/home";
+
+export function meta({}: Route.MetaArgs) {
+  return [{ title: "CNVT® - Agência de Marketing 360º" }];
+}
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement | null>(null);
