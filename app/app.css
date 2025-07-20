@@ -1,15 +1,60 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "PP Object Sans";
+  src: url("/object-sans/subset-PPObjectSans-Light.woff2") format("woff2"),
+    url("/object-sans/subset-PPObjectSans-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Object Sans";
+  src: url("/object-sans/subset-PPObjectSans-Regular.woff2") format("woff2"),
+    url("/object-sans/subset-PPObjectSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Object Sans";
+  src: url("/object-sans/subset-PPObjectSans-Medium.woff2") format("woff2"),
+    url("/object-sans/subset-PPObjectSans-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Object Sans";
+  src: url("/object-sans/subset-PPObjectSans-Bold.woff2") format("woff2"),
+    url("/object-sans/subset-PPObjectSans-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+  --font-sans: "PP Object Sans", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply font-light;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+.links > a {
+  @apply py-6 md:h-1/4 flex items-center text-3xl md:text-5xl overflow-hidden transition;
+}
+
+.links > a > span {
+  @apply -ml-12 transition-[margin-left] duration-500 ease-in-out items-center;
+}
+.links > a:hover > span {
+  @apply ml-12;
+}
+.links > a:hover {
+  @apply bg-zinc-100 text-zinc-950;
 }
