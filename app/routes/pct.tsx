@@ -43,7 +43,7 @@ export default function PercentageCalculator() {
           percentualCalculado
         ).toFixed(2)}%`
       );
-      setTipoCalculo(`Variação absoluta: R$ ${formatNumber(valorAbsoluto)}`);
+      setTipoCalculo(`Variação absoluta: ${formatNumber(valorAbsoluto)}`);
     }
     // Caso 2: Tem inicial e porcentagem, calcular final
     else if (valorInicial && porcentagem && !valorFinal) {
@@ -51,9 +51,9 @@ export default function PercentageCalculator() {
       const diferenca = valorFinalCalculado - inicial;
       const tipoVariacao = perc >= 0 ? "após aumento" : "após redução";
 
-      setResultado(`Valor final: R$ ${formatNumber(valorFinalCalculado)}`);
+      setResultado(`Valor final: ${formatNumber(valorFinalCalculado)}`);
       setTipoCalculo(
-        `Diferença: R$ ${formatNumber(
+        `Diferença: ${formatNumber(
           Math.abs(diferenca)
         )} (${tipoVariacao} de ${Math.abs(perc)}%)`
       );
@@ -70,9 +70,9 @@ export default function PercentageCalculator() {
       const diferenca = final - valorInicialCalculado;
       const tipoVariacao = perc >= 0 ? "aumento" : "redução";
 
-      setResultado(`Valor inicial: R$ ${formatNumber(valorInicialCalculado)}`);
+      setResultado(`Valor inicial: ${formatNumber(valorInicialCalculado)}`);
       setTipoCalculo(
-        `Diferença: R$ ${formatNumber(
+        `Diferença: ${formatNumber(
           Math.abs(diferenca)
         )} (${tipoVariacao} de ${Math.abs(perc)}%)`
       );
@@ -125,7 +125,7 @@ export default function PercentageCalculator() {
             <div className="flex flex-col gap-4 lg:flex-row w-full">
               <div className="w-full">
                 <label className="block text-xl font-medium mb-4">
-                  Valor Inicial (R$)
+                  Valor Inicial
                 </label>
                 <input
                   type="text"
@@ -142,7 +142,7 @@ export default function PercentageCalculator() {
 
               <div className="w-full">
                 <label className="block text-xl font-medium mb-4">
-                  Valor Final (R$)
+                  Valor Final
                 </label>
                 <input
                   type="text"
