@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { CopyIcon } from "lucide-react";
+import { CopyIcon, HashIcon, RulerIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Logo } from "~/components/Logo";
 import type { Route } from "./+types/justificar";
@@ -15,19 +15,19 @@ type Measure = "visual" | "chars";
 // Caracteres "transparentes" usados para preencher os vãos entre palavras
 const fillers: Record<Filler, { name: string; description: string; chars: string[] }> = {
   unicode: {
-    name: "Espaços Unicode",
+    name: "Unicode",
     description:
       "Combina espaços de larguras diferentes (eme, ene, fino, ultrafino). Mais preciso e não é removido pela maioria das redes.",
     chars: [" ", " ", " ", " ", " "],
   },
   space: {
-    name: "Espaço comum",
+    name: "Comum",
     description:
       "Só espaços normais. Algumas plataformas juntam espaços repetidos em um só.",
     chars: [" "],
   },
   braille: {
-    name: "Braille vazio",
+    name: "Braille",
     description:
       "Caractere invisível (U+2800) que quase nenhuma plataforma remove. Menos preciso.",
     chars: [" ", "⠀"],
@@ -146,11 +146,6 @@ export default function Justificar() {
     }
   };
 
-  const optionClass = (active: boolean) =>
-    `p-4 md:p-6 text-lg font-medium border ${
-      active ? "bg-zinc-100 text-zinc-950" : ""
-    }`;
-
   return (
     <div>
       <div className="flex flex-col justify-between h-full">
@@ -165,62 +160,62 @@ export default function Justificar() {
       </div>
 
       <div className="tabs h-full shrink-0 grow">
-        <div className="p-8 flex flex-col gap-8">
-          <div>
-            <label className="block text-xl font-medium mb-4">
-              Preencher com
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {(Object.keys(fillers) as Filler[]).map((key) => (
-                <button
-                  key={key}
-                  className={optionClass(filler === key)}
-                  onClick={() => setFiller(key)}
-                >
-                  {fillers[key].name}
-                </button>
-              ))}
-            </div>
-            <div className="text-sm mt-2 opacity-70">
-              {fillers[filler].description}
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xl font-medium mb-4">
-              Alinhar por
-            </label>
-            <div className="flex flex-wrap gap-2">
+        <div className="flex items-center justify-between gap-2 border-b px-4 py-3 md:px-8 md:py-4">
+          <div className="flex border" title="Preencher com">
+            {(Object.keys(fillers) as Filler[]).map((key) => (
               <button
-                className={optionClass(measureBy === "visual")}
-                onClick={() => setMeasureBy("visual")}
+                key={key}
+                className={`px-2 py-2 md:px-5 text-sm md:text-base font-medium ${
+                  filler === key ? "bg-zinc-100 text-zinc-950" : ""
+                }`}
+                onClick={() => setFiller(key)}
               >
-                Largura visual
+                {fillers[key].name}
               </button>
-              <button
-                className={optionClass(measureBy === "chars")}
-                onClick={() => setMeasureBy("chars")}
-              >
-                Nº de caracteres
-              </button>
-            </div>
+            ))}
           </div>
+          <button
+            className="flex items-center gap-2 px-2 md:px-3 py-2 border text-sm md:text-base font-medium"
+            title={
+              measureBy === "visual"
+                ? "Alinhado por largura visual"
+                : "Alinhado por nº de caracteres"
+            }
+            onClick={() =>
+              setMeasureBy((prev) => (prev === "visual" ? "chars" : "visual"))
+            }
+          >
+            {measureBy === "visual" ? (
+              <RulerIcon className="size-5" />
+            ) : (
+              <HashIcon className="size-5" />
+            )}
+            <span className="hidden md:inline">
+              {measureBy === "visual" ? "Largura visual" : "Nº de caracteres"}
+            </span>
+          </button>
+        </div>
 
+        <div className="p-4 md:p-8 flex flex-col gap-4 md:gap-8">
           <div className="flex flex-col lg:flex-row gap-4">
             <textarea
               value={text}
-              rows={8}
-              className="text-2xl bg-zinc-900 p-8 w-full outline-none focus:ring-2 resize-y"
+              rows={5}
+              className="text-xl md:text-2xl bg-zinc-900 p-6 md:p-8 w-full outline-none focus:ring-2 resize-y"
               onChange={(e) => setText(e.target.value)}
               placeholder={"Seu texto aqui,\numa linha\npor vez"}
             />
 
             <div
-              className="p-8 w-full text-2xl border flex justify-between gap-4 cursor-pointer"
+              className="p-4 md:p-8 w-full min-w-0 border flex flex-col gap-4 cursor-pointer"
               onClick={() => result && handleCopy()}
             >
+              <div className="flex items-center justify-between text-sm font-medium uppercase tracking-wider opacity-70">
+                Resultado
+                <CopyIcon className="size-5 md:size-6" />
+              </div>
               <div
-                className="whitespace-pre overflow-x-auto"
+                className="whitespace-pre overflow-x-auto text-base md:text-2xl"
                 style={{
                   fontFamily:
                     measureBy === "visual" ? MEASURE_FONT : "monospace",
@@ -230,17 +225,19 @@ export default function Justificar() {
                   <span className="opacity-50">O resultado aparece aqui</span>
                 )}
               </div>
-              <div>
-                <CopyIcon className="size-8" />
-              </div>
             </div>
           </div>
 
-          <div className="text-sm opacity-70">
-            O alinhamento é uma simulação: cada app usa uma fonte diferente, então
-            o resultado pode variar um pouco. "Largura visual" mede na fonte do
-            sistema (iOS/Android); "Nº de caracteres" iguala a quantidade de
-            letras, ideal para fontes monoespaçadas.
+          <div className="text-sm opacity-70 flex flex-col gap-2">
+            <p>
+              {fillers[filler].name}: {fillers[filler].description}
+            </p>
+            <p>
+              O alinhamento é uma simulação: cada app usa uma fonte diferente,
+              então o resultado pode variar um pouco. A régua mede a largura
+              visual na fonte do sistema (iOS/Android); o # iguala a quantidade
+              de caracteres, ideal para fontes monoespaçadas.
+            </p>
           </div>
         </div>
 
