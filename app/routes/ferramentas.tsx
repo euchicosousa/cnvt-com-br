@@ -295,7 +295,7 @@ export default function Ferramentas() {
   return (
     <>
       <div className="flex flex-col justify-between h-full">
-        <div className="flex gap-4 items-center justify-between p-12 md:border-r border-b">
+        <div className="flex gap-4 items-center justify-between p-8 md:p-12 md:border-r border-b">
           <Link to={"/"}>
             <Logo className="size-8 md:size-12" />
           </Link>
@@ -309,15 +309,15 @@ export default function Ferramentas() {
         <div className="flex-col">
           <div className="flex border-b justify-between md:justify-start">
             <button
-              className={`p-8 ${
+              className={`p-4 md:p-8 ${
                 isUppercase ? "bg-zinc-100 text-zinc-950" : ""
               }`}
               onClick={() => setIsUppercase((prev) => !prev)}
             >
-              <CaseUpperIcon className="size-16" />
+              <CaseUpperIcon className="size-10 md:size-16" />
             </button>
             <button
-              className={`p-8 relative ${
+              className={`p-4 md:p-8 relative ${
                 isTracking !== "normal" ? "bg-zinc-100 text-zinc-950" : ""
               }`}
               onClick={() =>
@@ -330,19 +330,19 @@ export default function Ferramentas() {
                 )
               }
             >
-              <MoveHorizontal className="size-16" />
+              <MoveHorizontal className="size-10 md:size-16" />
               {isTracking === "widest" && (
-                <AsteriskIcon className="size-12 absolute top-2 right-2" />
+                <AsteriskIcon className="size-6 md:size-12 absolute top-1 right-1 md:top-2 md:right-2" />
               )}
             </button>
             <button
-              className={`p-8 ${isFont ? "bg-zinc-100 text-zinc-950" : ""}`}
+              className={`p-4 md:p-8 ${isFont ? "bg-zinc-100 text-zinc-950" : ""}`}
               onClick={() => setIsFont((prev) => !prev)}
             >
-              <TypeIcon className="size-16" />
+              <TypeIcon className="size-10 md:size-16" />
             </button>
-            <Link to={"/justificar"} className="p-8">
-              <AlignJustifyIcon className="size-16" />
+            <Link to={"/justificar"} className="p-4 md:p-8">
+              <AlignJustifyIcon className="size-10 md:size-16" />
             </Link>
           </div>
           <div className="p-8">

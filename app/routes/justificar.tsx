@@ -154,7 +154,7 @@ export default function Justificar() {
   return (
     <div>
       <div className="flex flex-col justify-between h-full">
-        <div className="flex gap-4 items-center justify-between p-12 md:border-r border-b">
+        <div className="flex gap-4 items-center justify-between p-8 md:p-12 md:border-r border-b">
           <Link to={"/"}>
             <Logo className="size-8 md:size-12" />
           </Link>
