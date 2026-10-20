@@ -1,4 +1,5 @@
 import {
+  AlignJustifyIcon,
   AsteriskIcon,
   CaseUpperIcon,
   CopyIcon,
@@ -340,6 +341,9 @@ export default function Ferramentas() {
             >
               <TypeIcon className="size-16" />
             </button>
+            <Link to={"/justificar"} className="p-8">
+              <AlignJustifyIcon className="size-16" />
+            </Link>
           </div>
           <div className="p-8">
             <input

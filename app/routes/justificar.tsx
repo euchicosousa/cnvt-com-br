@@ -79,8 +79,7 @@ function fillGap(
 function justify(
   input: string,
   filler: Filler,
-  measureBy: Measure,
-  justifyLastLine: boolean
+  measureBy: Measure
 ) {
   const measure = measureBy === "visual" ? measureVisual : measureChars;
   const units = fillers[filler].chars
@@ -96,9 +95,8 @@ function justify(
   );
 
   return lines
-    .map((words, index) => {
-      const isLastLine = index === lines.length - 1;
-      if (words.length < 2 || (isLastLine && !justifyLastLine)) {
+    .map((words) => {
+      if (words.length < 2) {
         return words.join(" ");
       }
 
@@ -129,18 +127,14 @@ export default function Justificar() {
   const [text, setText] = useState("");
   const [filler, setFiller] = useState<Filler>("unicode");
   const [measureBy, setMeasureBy] = useState<Measure>("visual");
-  const [justifyLastLine, setJustifyLastLine] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   // A medição visual usa canvas, que só existe no navegador
   useEffect(() => setIsClient(true), []);
 
   const result = useMemo(
-    () =>
-      isClient && text.trim()
-        ? justify(text, filler, measureBy, justifyLastLine)
-        : "",
-    [isClient, text, filler, measureBy, justifyLastLine]
+    () => (isClient && text.trim() ? justify(text, filler, measureBy) : ""),
+    [isClient, text, filler, measureBy]
   );
 
   const handleCopy = async () => {
@@ -192,44 +186,23 @@ export default function Justificar() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-8">
-            <div>
-              <label className="block text-xl font-medium mb-4">
-                Alinhar por
-              </label>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  className={optionClass(measureBy === "visual")}
-                  onClick={() => setMeasureBy("visual")}
-                >
-                  Largura visual
-                </button>
-                <button
-                  className={optionClass(measureBy === "chars")}
-                  onClick={() => setMeasureBy("chars")}
-                >
-                  Nº de caracteres
-                </button>
-              </div>
-            </div>
-            <div>
-              <label className="block text-xl font-medium mb-4">
-                Última linha
-              </label>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  className={optionClass(!justifyLastLine)}
-                  onClick={() => setJustifyLastLine(false)}
-                >
-                  Normal
-                </button>
-                <button
-                  className={optionClass(justifyLastLine)}
-                  onClick={() => setJustifyLastLine(true)}
-                >
-                  Justificada
-                </button>
-              </div>
+          <div>
+            <label className="block text-xl font-medium mb-4">
+              Alinhar por
+            </label>
+            <div className="flex flex-wrap gap-2">
+              <button
+                className={optionClass(measureBy === "visual")}
+                onClick={() => setMeasureBy("visual")}
+              >
+                Largura visual
+              </button>
+              <button
+                className={optionClass(measureBy === "chars")}
+                onClick={() => setMeasureBy("chars")}
+              >
+                Nº de caracteres
+              </button>
             </div>
           </div>
 
